@@ -1,13 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using LumiSoft.Net.IMAP.Client;
-
-namespace LumiSoft.Net.IMAP
+﻿namespace LumiSoft.Net.IMAP
 {
+    using System;
+    using System.Collections.Generic;
+
+    using LumiSoft.Net.IMAP.Client;
+
     /// <summary>
-    /// This class is base class for IMAP SEARCH search-key. Defined in RFC 3501 6.4.4.
+    ///     This class is base class for IMAP SEARCH search-key. Defined in RFC 3501 6.4.4.
     /// </summary>
     public abstract class IMAP_Search_Key
     {
@@ -29,8 +28,13 @@ namespace LumiSoft.Net.IMAP
             r.ReadToFirstChar();
 
             // Keys group
-            if(r.StartsWith("(",false)){
+            if (r.StartsWith("(", false)) {
                 return IMAP_Search_Key_Group.Parse(new StringReader(r.ReadParenthesized()));
+            }
+            // ALL
+
+            if (r.StartsWith("ALL", false)) {
+                return IMAP_Search_Key_All.Parse(r);
             }
             // ANSWERED
             else if(r.StartsWith("ANSWERED",false)){
@@ -176,10 +180,10 @@ namespace LumiSoft.Net.IMAP
                 // Check if we hae sequence-set. Because of IMAP specification sucks a little here, why the hell they didn't 
                 // do the keyword(SEQSET) for it, like UID. Now we just have to try if it is sequence-set or BAD key. 
                 try{
-                   return IMAP_Search_Key_SeqSet.Parse(r);
+                    return IMAP_Search_Key_SeqSet.Parse(r);
                 }
                 catch{
-                   throw new ParseException("Unknown search key '" + r.ReadToEnd() + "'.");
+                    throw new ParseException("Unknown search key '" + r.ReadToEnd() + "'.");
                 }
             }
         }

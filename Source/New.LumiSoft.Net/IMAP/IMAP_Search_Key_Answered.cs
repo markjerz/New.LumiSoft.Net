@@ -1,13 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using LumiSoft.Net.IMAP.Client;
-
-namespace LumiSoft.Net.IMAP
+﻿namespace LumiSoft.Net.IMAP
 {
+    using System;
+    using System.Collections.Generic;
+
+    using LumiSoft.Net.IMAP.Client;
+
     /// <summary>
-    /// This class represents IMAP SEARCH <b>ANSWERED</b> key. Defined in RFC 3501 6.4.4.
+    ///     This class represents IMAP SEARCH <b>ANSWERED</b> key. Defined in RFC 3501 6.4.4.
     /// </summary>
     /// <remarks>Messages with the \Answered flag set.</remarks>
     public class IMAP_Search_Key_Answered : IMAP_Search_Key
