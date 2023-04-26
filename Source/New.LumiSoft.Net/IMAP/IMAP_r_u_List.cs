@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LumiSoft.Net.IMAP
+﻿namespace LumiSoft.Net.IMAP
 {
+    using System;
+    using System.Text;
+
     /// <summary>
     /// This class represents IMAP LIST response. Defined in RFC 3501 7.2.2.
     /// </summary>
@@ -165,7 +164,7 @@ namespace LumiSoft.Net.IMAP
                 }
                 retVal.Append(") ");
                 retVal.Append("\"" + m_Delimiter + "\" ");
-                retVal.Append(IMAP_Utils.EncodeMailbox(m_FolderName,encoding));
+                retVal.Append(IMAP_Utils.EncodeMailbox(m_FolderName, IMAP_Mailbox_Encoding.ImapUtf7));
                 retVal.Append("\r\n");
 
                 return retVal.ToString();
