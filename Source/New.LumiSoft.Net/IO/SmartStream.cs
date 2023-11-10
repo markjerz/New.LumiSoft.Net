@@ -1,13 +1,10 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-
-using LumiSoft.Net.Log;
-
 namespace LumiSoft.Net.IO
 {
+    using System;
+    using System.IO;
+    using System.Text;
+    using System.Threading;
+
     /// <summary>
     /// This class is wrapper to normal stream, provides most needed stream methods which are missing from normal stream.
     /// </summary>
@@ -29,7 +26,9 @@ namespace LumiSoft.Net.IO
             private SmartStream        m_pOwner          = null;
             private byte[]             m_pBuffer         = null;
             private SizeExceededAction m_ExceededAction  = SizeExceededAction.JunkAndThrowException;
-            private bool               m_CRLFLinesOnly   = true;
+
+            private readonly bool m_CRLFLinesOnly = false;
+
             private int                m_BytesInBuffer   = 0;
             private int                m_LastByte        = -1;
             private Exception          m_pException      = null;
@@ -1100,7 +1099,7 @@ namespace LumiSoft.Net.IO
                 byte[]             buffer         = op.Buffer;
                 int                bytesInBuffer  = 0;
                 int                lastByte       = -1;
-                bool               CRLFLinesOnly  = true;
+                bool CRLFLinesOnly = false;
                 int                lineBuffSize   = buffer.Length;
                 SizeExceededAction exceededAction = op.SizeExceededAction;
                 Exception          exception      = null;
